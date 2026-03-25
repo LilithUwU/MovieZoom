@@ -51,11 +51,13 @@ class ListFragment : Fragment() {
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
         
-        binding.button.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainerView, DetailsFragment())
-                .addToBackStack(null)
-                .commit()
-        }
+//        binding.button.setOnClickListener {
+//            parentFragmentManager.beginTransaction()
+//                .replace(R.id.fragmentContainerView, DetailsFragment())
+//                .addToBackStack(null)
+//                .commit()
+//        }
+
+
     }
 }

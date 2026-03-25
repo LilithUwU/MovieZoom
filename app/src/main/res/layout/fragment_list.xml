@@ -6,12 +6,9 @@
     android:background="?android:attr/windowBackground"
     tools:context=".ListFragment">
 
-    <TextView
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Movie List Fragment\n(Click here to see Details)"
-        android:textAlignment="center" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </FrameLayout>
