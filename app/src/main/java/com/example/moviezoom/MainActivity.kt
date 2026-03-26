@@ -43,7 +43,6 @@ class MainActivity : AppCompatActivity() {
                         .replace(R.id.fragmentContainerView, DetailsFragment())
                         .addToBackStack(null)
                         .commit()
-                        mainViewModel.clearSelectedMovie()
                     }
                 }
             }

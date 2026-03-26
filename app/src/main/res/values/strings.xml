@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MovieZoom</string>
+    <string name="release_date_format">Release Date: %1$s</string>
+    <string name="vote_average_format">%1$.1f/10</string>
+    <string name="overview_label">Overview</string>
+    <string name="content_description_poster">Movie Poster</string>
+    <string name="content_description_backdrop">Movie Backdrop</string>
 </resources>

@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class MainViewModel: ViewModel() {
-    private val TAG = "MainViewModel"
 
     private val _movies = MutableStateFlow<List<Movie>>(
         value = emptyList()
@@ -23,6 +22,7 @@ class MainViewModel: ViewModel() {
 
     fun selectMovie(movie: Movie) {
         _selectedMovie.value = movie
+        Log.d(TAG, "selectMovie: $movie")
     }
 
     fun clearSelectedMovie() {
@@ -33,7 +33,7 @@ class MainViewModel: ViewModel() {
         viewModelScope.launch {
             try {
                 val response = movieApi.getTopRatedMovies()
-                _movies.value = response.results ?: emptyList()
+                _movies.value = response.results
                 Log.d(TAG, "Movies: ${_movies.value}")
             } catch (e: Exception) {
                 Log.e(TAG, "Error: ${e.message}")
