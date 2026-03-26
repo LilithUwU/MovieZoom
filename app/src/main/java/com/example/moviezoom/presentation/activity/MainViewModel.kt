@@ -3,11 +3,7 @@ package com.example.moviezoom.presentation.activity
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.moviezoom.data.remote.MovieApi
-import com.example.moviezoom.data.repository.MovieRepositoryImpl
-import com.example.moviezoom.di.NetworkModule
 import com.example.moviezoom.domain.model.Movie
-import com.example.moviezoom.domain.repository.MovieRepository
 import com.example.moviezoom.domain.usecase.GetTopRatedMoviesUseCase
 import com.example.moviezoom.domain.usecase.SearchMovieUseCase
 import com.example.moviezoom.presentation.uistate.MovieUiState
@@ -18,13 +14,10 @@ import kotlinx.coroutines.launch
 
 const val TAG = "MovieZoom"
 
-class MainViewModel : ViewModel() {
-
-
-    private val movieApi: MovieApi = NetworkModule.provideMovieApi()
-    private val movieRepository: MovieRepository = MovieRepositoryImpl(movieApi)
-    private val getTopRatedMoviesUseCase = GetTopRatedMoviesUseCase(movieRepository)
-    private val searchMovieUseCase = SearchMovieUseCase(movieRepository)
+class MainViewModel(
+    private val getTopRatedMoviesUseCase: GetTopRatedMoviesUseCase,
+    private val searchMovieUseCase: SearchMovieUseCase
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow<MovieUiState>(MovieUiState.Loading)
     val uiState: StateFlow<MovieUiState> = _uiState.asStateFlow()

@@ -6,16 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
 import com.example.moviezoom.R
 import com.example.moviezoom.databinding.FragmentDetailsBinding
 import com.example.moviezoom.presentation.activity.MainViewModel
 import com.example.moviezoom.presentation.activity.TAG
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 class DetailsFragment : Fragment() {
     private lateinit var binding: FragmentDetailsBinding
-    private val mainViewModel: MainViewModel by activityViewModels()
+    private val mainViewModel: MainViewModel by activityViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
