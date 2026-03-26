@@ -49,7 +49,8 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.fragment.ktx)
-    
+    implementation(libs.androidx.cardview)
+
     // Networking
     implementation(libs.retrofit)
     implementation(libs.converter.gson.v290)

@@ -7,6 +7,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 
+const val BASE_URL = "https://api.themoviedb.org/3/"
+const val IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500"
+
 private val okHttpClient = OkHttpClient.Builder()
     .addInterceptor { chain ->
         val original = chain.request()
@@ -22,7 +25,7 @@ private val okHttpClient = OkHttpClient.Builder()
     .build()
 
 val retrofit: Retrofit = Retrofit.Builder()
-    .baseUrl("https://api.themoviedb.org/3/")
+    .baseUrl(BASE_URL)
     .client(okHttpClient)
     .addConverterFactory(GsonConverterFactory.create())
     .build()
