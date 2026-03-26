@@ -18,6 +18,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.moviezoom.databinding.FragmentListBinding
 import kotlinx.coroutines.launch
 
@@ -68,6 +69,21 @@ class ListFragment : Fragment() {
             mainViewModel.selectMovie(movie)
         }
 
+        binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val layoutManager = recyclerView.layoutManager as GridLayoutManager
+                val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()
+                val totalItemCount = layoutManager.itemCount
+
+                if (lastVisibleItemPosition != RecyclerView.NO_POSITION && lastVisibleItemPosition == totalItemCount - 1) {
+                    binding.loadMoreButton.visibility = View.VISIBLE
+                } else {
+                    binding.loadMoreButton.visibility = View.GONE
+                }
+            }
+        })
+
         binding.recyclerView.apply {
             this.adapter = adapter
             layoutManager = GridLayoutManager(requireContext(), 3)
@@ -75,6 +91,10 @@ class ListFragment : Fragment() {
 
         binding.swipeRefreshLayout.setOnRefreshListener {
             mainViewModel.getMovies()
+        }
+
+        binding.loadMoreButton.setOnClickListener {
+            mainViewModel.loadMoreMovies()
         }
 
         viewLifecycleOwner.lifecycleScope.launch {

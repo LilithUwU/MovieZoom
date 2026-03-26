@@ -33,11 +33,15 @@ class MainViewModel : ViewModel() {
         _selectedMovie.value = null
     }
 
+
+    var currentPage = 0
+
     fun getMovies() {
         viewModelScope.launch {
             _uiState.value = MovieUiState.Loading
             try {
-                val response = movieApi.getTopRatedMovies()
+                val response = movieApi.getTopRatedMovies(1)
+                currentPage = 1
                 _uiState.value = MovieUiState.Success(response.results)
                 Log.d(TAG, "Movies loaded successfully")
             } catch (e: Exception) {
@@ -46,6 +50,25 @@ class MainViewModel : ViewModel() {
             }
         }
     }
+
+    fun loadMoreMovies() {
+        val currentMovies = (uiState.value as? MovieUiState.Success)?.movies ?: emptyList()
+        viewModelScope.launch {
+            _uiState.value = MovieUiState.Loading
+            try {
+                val nextPage = currentPage + 1
+                val response = movieApi.getTopRatedMovies(nextPage)
+                _uiState.value = MovieUiState.Success(currentMovies + response.results)
+                currentPage = nextPage
+                Log.d(TAG, "Fetched page $currentPage. Total movies: ${(currentMovies + response.results).size}")
+            } catch (e: Exception) {
+                _uiState.value = MovieUiState.Error(e.message ?: "Unknown Error")
+                Log.e(TAG, "Error: ${e.message}")
+            }
+        }
+    }
+
+
 
     fun search(query: String) {
         viewModelScope.launch {

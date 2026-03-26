@@ -36,7 +36,10 @@ val movieApi: MovieApi = retrofit.create(MovieApi::class.java)
 
 interface MovieApi {
     @GET("movie/top_rated")
-    suspend fun getTopRatedMovies(): MovieResponse
+    suspend fun getTopRatedMovies(
+        @Query("page") page: Int
+    ): MovieResponse
+
 
     @GET("search/movie")
     suspend fun searchMovie(
