@@ -10,12 +10,16 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class MainViewModel: ViewModel() {
+sealed class MovieUiState {
+    object Loading : MovieUiState()
+    data class Success(val movies: List<Movie>) : MovieUiState()
+    data class Error(val message: String) : MovieUiState()
+}
 
-    private val _movies = MutableStateFlow<List<Movie>>(
-        value = emptyList()
-    )
-    val movies: StateFlow<List<Movie>> = _movies
+class MainViewModel : ViewModel() {
+
+    private val _uiState = MutableStateFlow<MovieUiState>(MovieUiState.Loading)
+    val uiState: StateFlow<MovieUiState> = _uiState.asStateFlow()
 
     private val _selectedMovie = MutableStateFlow<Movie?>(null)
     val selectedMovie: StateFlow<Movie?> = _selectedMovie.asStateFlow()
@@ -31,12 +35,27 @@ class MainViewModel: ViewModel() {
 
     fun getMovies() {
         viewModelScope.launch {
+            _uiState.value = MovieUiState.Loading
             try {
                 val response = movieApi.getTopRatedMovies()
-                _movies.value = response.results
-                Log.d(TAG, "Movies: ${_movies.value}")
+                _uiState.value = MovieUiState.Success(response.results)
+                Log.d(TAG, "Movies loaded successfully")
             } catch (e: Exception) {
+                _uiState.value = MovieUiState.Error(e.message ?: "Unknown Error")
                 Log.e(TAG, "Error: ${e.message}")
+            }
+        }
+    }
+
+    fun search(query: String) {
+        viewModelScope.launch {
+            _uiState.value = MovieUiState.Loading
+            try {
+                val response = movieApi.searchMovie(query)
+                _uiState.value = MovieUiState.Success(response.results)
+                Log.d(TAG, "Movies loaded successfully")
+            } catch (e: Exception) {
+                _uiState.value = MovieUiState.Error(e.message ?: "Unknown Error")
             }
         }
     }

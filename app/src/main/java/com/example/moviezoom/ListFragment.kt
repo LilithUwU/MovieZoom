@@ -8,6 +8,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
@@ -25,8 +26,7 @@ class ListFragment : Fragment() {
     private val mainViewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentListBinding.inflate(inflater, container, false)
         return binding.root
@@ -46,18 +46,23 @@ class ListFragment : Fragment() {
                 searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                     override fun onQueryTextSubmit(query: String?): Boolean {
                         Log.d(TAG, "onQueryTextSubmit: $query")
+                        if (query != null) {
+                            mainViewModel.search(query)
+                        }
                         return true
                     }
-
                     override fun onQueryTextChange(newText: String?): Boolean {
                         return true
                     }
                 })
             }
+
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return false
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+
+        mainViewModel.getMovies()
 
         val adapter = MoviesAdapter { movie ->
             mainViewModel.selectMovie(movie)
@@ -68,15 +73,32 @@ class ListFragment : Fragment() {
             layoutManager = GridLayoutManager(requireContext(), 3)
         }
 
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            mainViewModel.getMovies()
+        }
+
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                mainViewModel.movies.collect { movies ->
-                    binding.recyclerView.visibility = View.VISIBLE
-                    adapter.setList(movies)
+                mainViewModel.uiState.collect { state ->
+                    binding.swipeRefreshLayout.isRefreshing = state is MovieUiState.Loading
+
+                    when (state) {
+                        is MovieUiState.Success -> {
+                            binding.recyclerView.visibility = View.VISIBLE
+                            adapter.setList(state.movies)
+                        }
+
+                        is MovieUiState.Error -> {
+                            Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT)
+                                .show()
+                        }
+
+                        is MovieUiState.Loading -> {
+
+                        }
+                    }
                 }
             }
         }
-
-        mainViewModel.getMovies()
     }
 }

@@ -71,4 +71,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // Swipe to refresh view
+    implementation(libs.androidx.swiperefreshlayout)
+
 }
