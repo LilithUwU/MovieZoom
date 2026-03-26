@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
 import com.example.moviezoom.databinding.FragmentDetailsBinding
-import com.example.moviezoom.network.IMAGE_BASE_URL
+import com.example.moviezoom.network.NetworkConstants.IMAGE_BASE_URL
 
 class DetailsFragment : Fragment() {
     private lateinit var binding: FragmentDetailsBinding

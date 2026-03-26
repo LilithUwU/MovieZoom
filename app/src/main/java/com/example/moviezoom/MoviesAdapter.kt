@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.moviezoom.databinding.ListItemBinding
-import com.example.moviezoom.network.IMAGE_BASE_URL
 import com.example.moviezoom.network.Movie
+import com.example.moviezoom.network.NetworkConstants.IMAGE_BASE_URL
 
 class MoviesAdapter(private val onMovieClick: (Movie) -> Unit) : RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
 
