@@ -29,7 +29,7 @@ class DetailsFragment : Fragment() {
         Log.d(TAG, "onViewCreated: $movie")
         movie?.let {
             binding.titleTextView.text = movie.title
-            binding.releaseDateTextView.text = movie.releaseDate
+            binding.releaseDateTextView.text = getString(R.string.release_date, movie.releaseDate)
             binding.overviewTextView.text = movie.overview
             Glide.with(binding.posterImage.context)
                 .load("$IMAGE_BASE_URL${movie.posterPath}")

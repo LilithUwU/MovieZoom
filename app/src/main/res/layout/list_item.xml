@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardView"
-    android:layout_width="130dp"
+    android:layout_width="@dimen/movie_item_width"
     android:layout_height="wrap_content"
-    android:layout_margin="4dp"
+    android:layout_margin="@dimen/margin_extra_small"
     android:backgroundTint="@color/colorSurface"
-    app:cardCornerRadius="16dp">
+    app:cardCornerRadius="@dimen/card_corner_radius">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="0dp"
-            android:layout_height="180dp"
+            android:layout_height="@dimen/movie_item_poster_height"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +26,7 @@
         <View
             android:id="@+id/ratingBar"
             android:layout_width="0dp"
-            android:layout_height="24dp"
+            android:layout_height="@dimen/rating_bar_height"
             android:background="@color/colorPrimaryVariant"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,9 +34,9 @@
 
         <ImageView
             android:id="@+id/star"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginEnd="4dp"
+            android:layout_width="@dimen/star_size"
+            android:layout_height="@dimen/star_size"
+            android:layout_marginEnd="@dimen/margin_extra_small"
             android:src="@drawable/baseline_star_24"
             app:layout_constraintBottom_toBottomOf="@id/ratingBar"
             app:layout_constraintEnd_toStartOf="@id/rating"
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:hint="4.5"
             android:textColor="@android:color/white"
-            android:textSize="12sp"
+            android:textSize="@dimen/text_size_small"
             app:layout_constraintBottom_toBottomOf="@id/ratingBar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/star"
@@ -64,7 +64,7 @@
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
-            android:padding="8dp"
+            android:padding="@dimen/padding_small"
             android:hint="The Lord of the Rings"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

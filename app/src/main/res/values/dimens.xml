@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="elevation_small">4dp</dimen>
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_medium">16dp</dimen>
+    <dimen name="padding_large">20dp</dimen>
+    <dimen name="margin_extra_small">4dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_medium">16dp</dimen>
+    <dimen name="movie_item_width">130dp</dimen>
+    <dimen name="movie_item_poster_height">180dp</dimen>
+    <dimen name="poster_detail_width">150dp</dimen>
+    <dimen name="poster_detail_height">200dp</dimen>
+    <dimen name="rating_bar_height">24dp</dimen>
+    <dimen name="star_size">14dp</dimen>
+    <dimen name="card_corner_radius">16dp</dimen>
+    <dimen name="text_size_small">12sp</dimen>
+    <dimen name="line_spacing_small">4dp</dimen>
+</resources>

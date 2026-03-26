@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
+    android:padding="@dimen/padding_large"
     android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,20 +13,18 @@
 
         <ImageView
             android:id="@+id/posterImage"
-            android:layout_width="150dp"
-            android:layout_height="200dp"
-            android:contentDescription="@string/content_description_backdrop"
+            android:layout_width="@dimen/poster_detail_width"
+            android:layout_height="@dimen/poster_detail_height"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
 
-
         <TextView
             android:id="@+id/titleTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="@dimen/margin_medium"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -35,23 +33,13 @@
             tools:text="Movie Title" />
 
         <TextView
-            android:id="@+id/releaseDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Release Date: "
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-            app:layout_constraintStart_toStartOf="@+id/titleTextView"
-            app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
-
-        <TextView
             android:id="@+id/releaseDateTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/releaseDate"
-            app:layout_constraintTop_toTopOf="@+id/releaseDate"
+            app:layout_constraintStart_toStartOf="@+id/titleTextView"
+            app:layout_constraintTop_toBottomOf="@+id/titleTextView"
             tools:text="2023-10-27" />
 
         <RatingBar
@@ -59,7 +47,7 @@
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/margin_small"
             android:isIndicator="true"
             android:progressTint="@color/colorPrimaryVariant"
             android:numStars="10"
@@ -71,7 +59,7 @@
             android:id="@+id/voteAverageTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/margin_small"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
             app:layout_constraintStart_toStartOf="@+id/ratingBar"
             app:layout_constraintTop_toBottomOf="@+id/ratingBar"
@@ -81,7 +69,7 @@
             android:id="@+id/overviewLabel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/margin_medium"
             android:text="@string/overview_label"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:textStyle="bold"
@@ -93,8 +81,8 @@
             android:id="@+id/overviewTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:lineSpacingExtra="4dp"
+            android:layout_marginTop="@dimen/margin_extra_small"
+            android:lineSpacingExtra="@dimen/line_spacing_small"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/overviewLabel"
             app:layout_constraintTop_toBottomOf="@id/overviewLabel"
