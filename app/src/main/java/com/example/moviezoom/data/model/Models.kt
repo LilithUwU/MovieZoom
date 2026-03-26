@@ -1,4 +1,4 @@
-package com.example.moviezoom.network
+package com.example.moviezoom.data.model
 
 import com.google.gson.annotations.SerializedName
 

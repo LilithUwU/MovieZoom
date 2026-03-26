@@ -1,4 +1,4 @@
-package com.example.moviezoom
+package com.example.moviezoom.presentation.fragments.details
 
 import android.os.Bundle
 import android.util.Log
@@ -8,8 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
+import com.example.moviezoom.R
 import com.example.moviezoom.databinding.FragmentDetailsBinding
-import com.example.moviezoom.network.NetworkConstants.IMAGE_BASE_URL
+import com.example.moviezoom.presentation.activity.MainViewModel
+import com.example.moviezoom.presentation.activity.TAG
 
 class DetailsFragment : Fragment() {
     private lateinit var binding: FragmentDetailsBinding
@@ -32,7 +34,7 @@ class DetailsFragment : Fragment() {
             binding.releaseDateTextView.text = getString(R.string.release_date, movie.releaseDate)
             binding.overviewTextView.text = movie.overview
             Glide.with(binding.posterImage.context)
-                .load("$IMAGE_BASE_URL${movie.posterPath}")
+                .load(movie.posterPath)
                 .into(binding.posterImage)
             binding.ratingBar.rating= movie.voteAverage.toFloat()
             binding.voteAverageTextView.text = "%.1f/10".format(movie.voteAverage)

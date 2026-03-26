@@ -1,4 +1,4 @@
-package com.example.moviezoom
+package com.example.moviezoom.presentation.fragments.list
 
 import android.os.Bundle
 import android.util.Log
@@ -19,7 +19,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.moviezoom.R
 import com.example.moviezoom.databinding.FragmentListBinding
+import com.example.moviezoom.presentation.activity.MainViewModel
+import com.example.moviezoom.presentation.activity.TAG
+import com.example.moviezoom.presentation.uistate.MovieUiState
 import kotlinx.coroutines.launch
 
 class ListFragment : Fragment() {

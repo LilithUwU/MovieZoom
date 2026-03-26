@@ -1,12 +1,11 @@
-package com.example.moviezoom
+package com.example.moviezoom.presentation.fragments.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.moviezoom.databinding.ListItemBinding
-import com.example.moviezoom.network.Movie
-import com.example.moviezoom.network.NetworkConstants.IMAGE_BASE_URL
+import com.example.moviezoom.domain.model.Movie
 
 class MoviesAdapter(private val onMovieClick: (Movie) -> Unit) : RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
 
@@ -29,9 +28,9 @@ class MoviesAdapter(private val onMovieClick: (Movie) -> Unit) : RecyclerView.Ad
         holder.binding.title.text = movie.title
         holder.binding.rating.text = "%.1f".format(movie.voteAverage)
         Glide.with(holder.binding.imageView.context)
-            .load("$IMAGE_BASE_URL${movie.posterPath}")
+            .load(movie.posterPath)
             .into(holder.binding.imageView)
-        
+
         holder.binding.cardView.setOnClickListener {
             onMovieClick(movie)
         }

@@ -1,21 +1,15 @@
-package com.example.moviezoom.network
+package com.example.moviezoom.di
 
 import com.example.moviezoom.BuildConfig
+import com.example.moviezoom.data.remote.MovieApi
+import com.example.moviezoom.data.remote.NetworkConstants
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Query
-
-object NetworkConstants {
-    const val BASE_URL = "https://api.themoviedb.org/3/"
-    const val IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500"
-}
 
 object NetworkModule {
-
     private val authInterceptor = Interceptor { chain ->
         val request = chain.request().newBuilder()
             .addHeader("Authorization", "Bearer ${BuildConfig.MOVIE_API_KEY}")
@@ -44,21 +38,7 @@ object NetworkModule {
             .build()
     }
 
-    val movieApi: MovieApi by lazy {
-        retrofit.create(MovieApi::class.java)
+    fun provideMovieApi(): MovieApi {
+        return retrofit.create(MovieApi::class.java)
     }
-}
-
-interface MovieApi {
-
-    @GET("movie/top_rated")
-    suspend fun getTopRatedMovies(
-        @Query("page") page: Int
-    ): MovieResponse
-
-    @GET("search/movie")
-    suspend fun searchMovie(
-        @Query("query") searchTerm: String,
-        @Query("page") page: Int = 1
-    ): MovieResponse
 }

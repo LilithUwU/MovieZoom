@@ -1,4 +1,4 @@
-package com.example.moviezoom
+package com.example.moviezoom.presentation.activity
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
@@ -9,7 +9,10 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.example.moviezoom.presentation.fragments.list.ListFragment
+import com.example.moviezoom.R
 import com.example.moviezoom.databinding.ActivityMainBinding
+import com.example.moviezoom.presentation.fragments.details.DetailsFragment
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -28,7 +31,7 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        
+
         setSupportActionBar(binding.toolbar)
 
         supportFragmentManager.addOnBackStackChangedListener {
