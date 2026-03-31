@@ -10,7 +10,6 @@ import com.bumptech.glide.Glide
 import com.example.moviezoom.R
 import com.example.moviezoom.databinding.FragmentDetailsBinding
 import com.example.moviezoom.presentation.activity.MainViewModel
-import com.example.moviezoom.presentation.activity.TAG
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 class DetailsFragment : Fragment() {
@@ -28,7 +27,6 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val movie = mainViewModel.selectedMovie.value
-        Log.d(TAG, "onViewCreated: $movie")
         movie?.let {
             binding.titleTextView.text = movie.title
             binding.releaseDateTextView.text = getString(R.string.release_date, movie.releaseDate)

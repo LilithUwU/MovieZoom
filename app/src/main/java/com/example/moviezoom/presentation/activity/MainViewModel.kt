@@ -6,13 +6,14 @@ import androidx.lifecycle.viewModelScope
 import com.example.moviezoom.domain.model.Movie
 import com.example.moviezoom.domain.usecase.GetTopRatedMoviesUseCase
 import com.example.moviezoom.domain.usecase.SearchMovieUseCase
+import com.example.moviezoom.presentation.uistate.ErrorType
 import com.example.moviezoom.presentation.uistate.MovieUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import java.net.UnknownHostException
 
-const val TAG = "MovieZoom"
 
 class MainViewModel(
     private val getTopRatedMoviesUseCase: GetTopRatedMoviesUseCase,
@@ -30,7 +31,6 @@ class MainViewModel(
 
     fun selectMovie(movie: Movie) {
         _selectedMovie.value = movie
-        Log.d(TAG, "selectMovie: $movie")
     }
 
     fun clearSelectedMovie() {
@@ -46,10 +46,8 @@ class MainViewModel(
                 val moviePage = getTopRatedMoviesUseCase(1)
                 currentPage = 1
                 _uiState.value = MovieUiState.Success(moviePage.results)
-                Log.d(TAG, "Movies loaded successfully")
             } catch (e: Exception) {
-                _uiState.value = MovieUiState.Error(e.message ?: "Unknown Error")
-                Log.e(TAG, "Error: ${e.message}")
+                handleError(e)
             }
         }
     }
@@ -63,10 +61,8 @@ class MainViewModel(
                 val moviePage = getTopRatedMoviesUseCase(nextPage)
                 _uiState.value = MovieUiState.Success(currentMovies + moviePage.results)
                 currentPage = nextPage
-                Log.d(TAG, "Fetched page $currentPage. Total movies: ${(currentMovies + moviePage.results).size}")
             } catch (e: Exception) {
-                _uiState.value = MovieUiState.Error(e.message ?: "Unknown Error")
-                Log.e(TAG, "Error: ${e.message}")
+                handleError(e)
             }
         }
     }
@@ -77,10 +73,17 @@ class MainViewModel(
             try {
                 val moviePage = searchMovieUseCase(query, 1)
                 _uiState.value = MovieUiState.Success(moviePage.results)
-                Log.d(TAG, "Movies loaded successfully")
             } catch (e: Exception) {
-                _uiState.value = MovieUiState.Error(e.message ?: "Unknown Error")
+                handleError(e)
             }
         }
+    }
+
+    private fun handleError(e: Exception) {
+        val errorType = when (e) {
+            is UnknownHostException -> ErrorType.Network
+            else -> ErrorType.Unknown(e.message)
+        }
+        _uiState.value = MovieUiState.Error(errorType)
     }
 }

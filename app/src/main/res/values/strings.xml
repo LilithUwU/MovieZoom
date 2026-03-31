@@ -7,4 +7,8 @@
     <string name="content_description_backdrop">Movie Backdrop</string>
     <string name="load_more">Load more</string>
     <string name="release_date">Release Date: %s</string>
+    <string name="error_loading_movies">An error occurred while loading movies.</string>
+    <string name="retry">Retry</string>
+    <string name="no_movies_found">No movies found.</string>
+    <string name="error_internet">No internet connection. Please check your network and try again.</string>
 </resources>
