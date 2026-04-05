@@ -2,6 +2,14 @@
 
 MovieZoom is a media browsing application built with the TMDB API.
 
+<img height="250" alt="image" src="https://github.com/user-attachments/assets/0961f1e6-06d8-4b05-b487-9b9511da492c" />
+
+<img height="250" alt="image" src="https://github.com/user-attachments/assets/0065af91-9a1f-4379-9ebd-94c48f253bc7" />
+
+<img height="250" alt="image" src="https://github.com/user-attachments/assets/c11ce4b2-6cd5-4ce5-8a13-44f07c276708" />
+
+
+
 ## Compliance with Requirements
 As specified in the assignment, this project implements:
 - **Language** Kotlin
