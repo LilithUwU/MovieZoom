@@ -38,3 +38,6 @@ The following optional features were implemented:
 ## Setup
 1. Add your `TMDB_API_KEY` to `local.properties`.
 2. Build and run the app on a device with **API 31+**.
+   
+## Downloading APK Artifacts from GitHub Actions
+After the CI/CD process is completed, you can find the APK artifacts in the <a href="https://github.com/LilithUwU/MovieZoom/actions">Actions tab</a> on GitHub. Look for the latest successful build and download the APK file from there.
