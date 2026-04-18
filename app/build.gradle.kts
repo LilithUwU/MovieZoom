@@ -24,7 +24,7 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -49,7 +49,10 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.fragment.ktx)
+    implementation(libs.androidx.fragment)
+    implementation(libs.androidx.recyclerview)
     implementation(libs.androidx.cardview)
+    implementation(libs.androidx.swiperefreshlayout)
 
     // Networking
     implementation(libs.retrofit)
@@ -65,8 +68,6 @@ dependencies {
     // Coroutines
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.coroutines.core)
-    implementation(libs.androidx.fragment)
-    implementation(libs.androidx.recyclerview)
 
     testImplementation(libs.junit)
     testImplementation(libs.mockk)
@@ -74,8 +75,12 @@ dependencies {
     
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+}
 
-    // Swipe to refresh view
-    implementation(libs.androidx.swiperefreshlayout)
-
+tasks.withType<Test> {
+    testLogging {
+        events("passed", "skipped", "failed", "standardOut", "standardError")
+        showStandardStreams = true
+        exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+    }
 }
