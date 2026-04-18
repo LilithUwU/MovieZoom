@@ -9,7 +9,6 @@ MovieZoom is a media browsing application built with the TMDB API.
 <img height="250" alt="image" src="https://github.com/user-attachments/assets/c11ce4b2-6cd5-4ce5-8a13-44f07c276708" />
 
 
-
 ## Compliance with Requirements
 As specified in the assignment, this project implements:
 - **Language** Kotlin
@@ -26,6 +25,7 @@ Beyond the mandatory requirements, the following tools and patterns were chosen 
 - **Coroutines & Flow** for asynchronous operations and reactive state management via `StateFlow`.
 - **Glide** for image loading and caching of movie posters.
 - **MockK** for unit testing.
+- **GitHub Actions** for continuous integration and automated testing workflows.
 
 ## Detail Screen Strategy
 Used shared ViewModel to avoid the overhead of serializing data and the 1MB system limit, allowing screens to instantly access the same objects directly from memory.
