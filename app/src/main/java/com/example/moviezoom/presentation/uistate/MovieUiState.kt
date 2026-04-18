@@ -10,5 +10,6 @@ sealed class MovieUiState {
 
 sealed class ErrorType {
     object Network : ErrorType()
+    object Unauthorized : ErrorType()
     data class Unknown(val message: String?) : ErrorType()
 }

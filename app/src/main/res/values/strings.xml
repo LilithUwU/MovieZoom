@@ -11,4 +11,5 @@
     <string name="retry">Retry</string>
     <string name="no_movies_found">No movies found.</string>
     <string name="error_internet">No internet connection. Please check your network and try again.</string>
+    <string name="error_unauthorized">Invalid API key. Please check your configuration.</string>
 </resources>

@@ -159,6 +159,7 @@ class ListFragment : Fragment() {
                 
                 binding.errorTextView.text = when (state.errorType) {
                     is ErrorType.Network -> getString(R.string.error_internet)
+                    is ErrorType.Unauthorized -> getString(R.string.error_unauthorized)
                     is ErrorType.Unknown -> state.errorType.message ?: getString(R.string.error_loading_movies)
                 }
             }

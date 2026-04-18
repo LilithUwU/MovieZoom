@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 import java.net.UnknownHostException
 
 
@@ -82,6 +83,10 @@ class MainViewModel(
     private fun handleError(e: Exception) {
         val errorType = when (e) {
             is UnknownHostException -> ErrorType.Network
+            is HttpException -> {
+                if (e.code() == 401) ErrorType.Unauthorized
+                else ErrorType.Unknown(e.message())
+            }
             else -> ErrorType.Unknown(e.message)
         }
         _uiState.value = MovieUiState.Error(errorType)
